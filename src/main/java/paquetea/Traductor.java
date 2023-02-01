@@ -4,6 +4,10 @@
  */
 package paquetea;
 
+import java.util.ArrayList;
+import java.util.SortedMap;
+import java.util.TreeMap;
+
 /**
  *
  * @author tomas
@@ -13,50 +17,82 @@ package paquetea;
         ·palabraEspañol.
  */
 public class Traductor {
-    //Se declaran aquellos atributos que serán utiles par el ejercicioPropuesto.
-    private String palabraExtranjera;
-    private String palabraArgentina;
-    
-    //Constructor parametrizado. 
-    public Traductor(String palabraExtranjera, String palabraArgentina) {
-        this.palabraExtranjera = palabraExtranjera;
-        this.palabraArgentina = palabraArgentina;
-    }
-    //Constructor vacío.
+
+    private SortedMap<String, String> palabrastraducir;
+
+//    public Traductor(SortedMap<String, String> palabrastraducir) {
+//        this.palabrastraducir = palabrastraducir;
+//    
+//    }
+//
+    //Constructor.
     public Traductor() {
-        //Sin registros.
+        this.palabrastraducir = new TreeMap<>();
     }
 
-    //Getters & Setters.
-    public String getPalabraExtranjera() {
-        return palabraExtranjera;
+    //Getter & Setter.
+    public SortedMap<String, String> getPalabrastraducir() {
+        return palabrastraducir;
     }
 
-    public void setPalabraExtranjera(String palabraExtranjera) {
-        this.palabraExtranjera = palabraExtranjera;
-    }
-
-    public String getPalabraArgentina() {
-        return palabraArgentina;
-    }
-
-    public void setPalabraArgentina(String palabraArgentina) {
-        this.palabraArgentina = palabraArgentina;
+    public void setPalabrastraducir(SortedMap<String, String> palabrastraducir) {
+        this.palabrastraducir = palabrastraducir;
     }
 
     //ToString. 
     @Override
     public String toString() {
-        return "Traductor{" + "palabraExtranjera=" + palabraExtranjera + ", palabraArgentina=" + palabraArgentina + '}';
+        return "Traductor{" + "palabrastraducir=" + palabrastraducir + '}';
     }
-    
-    //-------------------------------------------------------------------------------------------------------------------------------------------------
-    
-    //Método para guardar entrada.
-    public void guardarEntrada(String pExt, String pArg){
-     
+
+    //Método guardar entrada
+    public void guardarEntrada(String palabraExtranjera, String palabraEspanola) {
+        palabrastraducir.put(palabraExtranjera, palabraEspanola);
     }
-    
-    
+
+    //Método para borrar palabra que se busca traducir.
+    public void borrarPalabraExtranjera(String palabraExtranjera) {
+        palabrastraducir.remove(palabraExtranjera);
+    }
+
+    //Método para modificar palabras.
+    public void modificarPalabras(String palabraExtranjera, String palabraIncorpora) {
+        palabrastraducir.remove(palabraExtranjera);
+        palabrastraducir.put(palabraExtranjera, palabraIncorpora);
+    }
+
+    //Método para mostrar palabras
+    public void mostrarPalaras() {
+
+        for (String key : palabrastraducir.keySet()) {
+            System.out.printf("%s =  %s %n", key, palabrastraducir.get(key));
+        }
+    }
+
+    public String traducir(String palabraExtranjera) {
+        return palabrastraducir.get(palabraExtranjera);
+    }
+
+    //Método para sacar palabrasExtranjeras.
+    public ArrayList<String> sacarPalabrasExtranjeras() {
+
+        ArrayList<String> extranjera = new ArrayList<>();
+
+        for (String palabra : palabrastraducir.keySet()) {
+            extranjera.add(palabra);
+        }
+
+        return extranjera;
+    }
+
+    //Método para sacar palabrasEspanolas.
+    public ArrayList<String> sacarPalabrasEspanolas() {
+
+        ArrayList<String> espanolas = new ArrayList<>();
+        for (String palabra : palabrastraducir.keySet()) {
+            espanolas.add(palabrastraducir.get(palabra));
+        }
+        return espanolas;
+    }
 
 }
