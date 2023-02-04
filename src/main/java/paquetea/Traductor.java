@@ -52,7 +52,7 @@ public class Traductor {
 
     //Método para borrar palabra que se busca traducir.
     public void borrarPalabraExtranjera(String palabraExtranjera) {
-        palabrastraducir.remove(palabraExtranjera);
+        this.palabrastraducir.remove(palabraExtranjera);
     }
 
     //Método para modificar palabras.
